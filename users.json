@@ -1,0 +1,23 @@
+[
+    {
+        "user_id": 1,
+        "name": "Carlos",
+        "balance": 100,
+        "has_debt": false,
+        "is_premium": true
+    },
+    {
+        "user_id": 2,
+        "name": "Ana",
+        "balance": 30,
+        "has_debt": false,
+        "is_premium": false
+    },
+    {
+        "user_id": 3,
+        "name": "Luis",
+        "balance": 80,
+        "has_debt": true,
+        "is_premium": false
+    }
+]

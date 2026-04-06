@@ -1,4 +1,4 @@
-DATABASE_TYPE = "mysql"   # opciones: "mysql" o "json"
+DATABASE_TYPE = "json"   # opciones: "mysql" o "json"
 
 MYSQL_CONFIG = {
     "host": "localhost",
