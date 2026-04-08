@@ -7,6 +7,7 @@ class Usuario:
     def __init__(self, codigo_vip=False, antiguedad=0):
         self.codigo_vip = codigo_vip
         self.antiguedad = antiguedad
+        self.precio_base = 100.0
 
 class MotorDescuentosTest(unittest.TestCase):
 

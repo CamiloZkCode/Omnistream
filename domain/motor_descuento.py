@@ -1,30 +1,24 @@
-# motor_descuentos.py
+# DOMAIN/services/motor_descuentos.py
+
+# domain/motor_descuento.py
 
 class MotorDescuentos:
-    def calcular(self, usuario):
-        """
-        Retorna el precio final aplicando reglas de descuento.
-        Las reglas son:
-        - Base: 100 si no hay descuento especial
-        - Código VIP: 20% de descuento
-        - Antigüedad: 10% de descuento adicional
-        - Límite de descuento: máximo 25%
-        """
 
-        precio_base = 100
+    def calcular(self, usuario):
+        precio = usuario.precio_base
         descuento = 0
 
-        # Regla código VIP
+        # Descuento por código VIP
         if getattr(usuario, "codigo_vip", False):
-            descuento += 20  # 20% de descuento
+            descuento += 20  # 20%
 
-        # Regla antigüedad
+        # Descuento por antigüedad
         if getattr(usuario, "antiguedad", 0) >= 5:
-            descuento += 10  # 10% adicional
+            descuento += 10  # 10%
 
-        # Limitar el descuento a 25%
+        # Limitar descuento máximo al 25%
         if descuento > 25:
             descuento = 25
 
-        precio_final = precio_base * (1 - descuento / 100)
-        return precio_final
+        precio_final = precio * (1 - descuento / 100)
+        return round(precio_final, 2)
