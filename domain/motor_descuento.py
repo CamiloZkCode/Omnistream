@@ -1,6 +1,4 @@
-# domain/motor_descuento.py
-
+# domain/motor_descuentos.py
 class MotorDescuentos:
     def calcular_precio_final(self, user, codigo=None):
-        # Clase vacía, valor genérico para que compile
-        return 0
+        return 0  # valor genérico → todas las pruebas fallarán
