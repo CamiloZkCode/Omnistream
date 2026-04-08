@@ -1,36 +1,37 @@
+# test/test_calcular.py
 import unittest
-from datetime import datetime, timedelta
-from domain.entities import User
-
-# La clase MotorDescuentos aún no tiene lógica
 from domain.motor_descuento import MotorDescuentos
+
+class Usuario:
+    """Clase simple para tests"""
+    def __init__(self, codigo_vip=False, antiguedad=0):
+        self.codigo_vip = codigo_vip
+        self.antiguedad = antiguedad
 
 class MotorDescuentosTest(unittest.TestCase):
 
     def setUp(self):
-        # Usuario premium con fecha de registro simulada
-        self.user = User(1, "Carlos", 100, False, is_premium=True)
-        self.user.registration_date = datetime.now() - timedelta(days=400)  # >1 año
+        self.motor = MotorDescuentos()
 
     def test_regla_base(self):
-        motor = MotorDescuentos()
-        precio = motor.calcular_precio_final(self.user, codigo=None)
-        self.assertEqual(precio, 100)  # Debe fallar
-
-    def test_regla_antiguedad(self):
-        motor = MotorDescuentos()
-        precio = motor.calcular_precio_final(self.user, codigo=None)
-        self.assertEqual(precio, 90)  # Debe fallar
+        usuario = Usuario()
+        precio = self.motor.calcular(usuario)
+        self.assertEqual(precio, 100)
 
     def test_regla_codigo_vip(self):
-        motor = MotorDescuentos()
-        precio = motor.calcular_precio_final(self.user, codigo="OMNI20")
-        self.assertEqual(precio, 80)  # Debe fallar
+        usuario = Usuario(codigo_vip=True)
+        precio = self.motor.calcular(usuario)
+        self.assertEqual(precio, 80)  # 20% de descuento
+
+    def test_regla_antiguedad(self):
+        usuario = Usuario(antiguedad=5)
+        precio = self.motor.calcular(usuario)
+        self.assertEqual(precio, 90)  # 10% de descuento
 
     def test_regla_limite_descuento(self):
-        motor = MotorDescuentos()
-        precio = motor.calcular_precio_final(self.user, codigo="OMNI20")
-        self.assertEqual(precio, 75)  # Debe fallar
+        usuario = Usuario(codigo_vip=True, antiguedad=10)
+        precio = self.motor.calcular(usuario)
+        self.assertEqual(precio, 75)  # máximo 25% de descuento
 
 if __name__ == "__main__":
     unittest.main()
