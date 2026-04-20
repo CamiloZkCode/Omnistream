@@ -24,5 +24,5 @@ class User:
 
     def upgrade_to_premium(self):
         if not self.can_upgrade_to_premium():
-            raise Exception("El usuario no cumple las condiciones para ser Premium.")
+            raise ValueError("El usuario no cumple las condiciones para ser Premium.")
         self.is_premium = True
